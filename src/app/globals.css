@@ -1,26 +1,132 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Primary Colors */
+  --primary-blue: #1A374D;
+  --secondary-blue: #406882;
+  
+  /* Accent Colors */
+  --profit-green: #4CAF50;
+  --loss-red: #F44336;
+  --warning-amber: #FFC107;
+  
+  /* Neutral Tones */
+  --dark-gray: #333333;
+  --mid-gray: #6C757D;
+  --light-gray: #E9ECEF;
+  --white: #FFFFFF;
+  
+  /* Data Visualization Colors */
+  --chart-blue: #2196F3;
+  --chart-purple: #9C27B0;
+  --chart-orange: #FF9800;
+  --chart-teal: #009688;
+  
+  /* Light Theme Default Colors */
+  --background: var(--white);
+  --foreground: var(--dark-gray);
+  --card-bg: var(--light-gray);
+  --nav-bg: var(--primary-blue);
+  --nav-text: var(--white);
+  --border-color: #dee2e6;
+  
+  /* Component Colors */
+  --button-primary: var(--primary-blue);
+  --button-secondary: var(--secondary-blue);
+  --link-color: var(--secondary-blue);
+  --input-border: var(--mid-gray);
+  --positive-value: var(--profit-green);
+  --negative-value: var(--loss-red);
+  --alert-color: var(--warning-amber);
+  
+  /* Font Variables */
+  --font-geist-sans: 'Inter', sans-serif;
+  --font-geist-mono: 'Fira Code', monospace;
+  --font-body: var(--font-geist-sans);
+  --font-headers: var(--font-geist-sans);
+  --font-financial: var(--font-geist-mono);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #121212;
     --foreground: #ededed;
+    --card-bg: #1e1e1e;
+    --nav-bg: #0d1b24;
+    --nav-text: var(--white);
+    --border-color: #2d3748;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body), Arial, Helvetica, sans-serif;
+  line-height: 1.5;
+}
+
+/* Typography Styles */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-headers), sans-serif;
+  font-weight: 600;
+  color: var(--primary-blue);
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+h1 {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  font-weight: 600;
+}
+
+h3 {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+h4 {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+p {
+  font-family: var(--font-body), sans-serif;
+  margin-bottom: 1rem;
+}
+
+button, .button {
+  font-family: var(--font-body), sans-serif;
+  font-weight: 500;
+}
+
+nav a {
+  font-family: var(--font-headers), sans-serif;
+  font-weight: 500;
+}
+
+/* Financial Data Styling */
+.financial-data, .stock-price, .percentage, code, pre {
+  font-family: var(--font-financial), monospace;
+}
+
+.positive-value {
+  color: var(--positive-value);
+  font-family: var(--font-financial), monospace;
+}
+
+.negative-value {
+  color: var(--negative-value);
+  font-family: var(--font-financial), monospace;
 }
