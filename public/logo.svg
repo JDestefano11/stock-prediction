@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 180 180">
+  <!-- Background Circle -->
+  <circle cx="90" cy="90" r="85" fill="#1A374D" />
+  
+  <!-- Crystal Shape -->
+  <g transform="translate(45, 30)">
+    <!-- Main Crystal -->
+    <path d="M45,0 L90,40 L45,120 L0,40 Z" fill="#2196F3" opacity="0.9" />
+    
+    <!-- Crystal Facets -->
+    <path d="M45,0 L90,40 L45,50 L0,40 Z" fill="#64B5F6" />
+    <path d="M45,50 L90,40 L45,120 Z" fill="#0D47A1" opacity="0.8" />
+    <path d="M0,40 L45,50 L45,120 Z" fill="#1565C0" opacity="0.8" />
+    
+    <!-- Highlight -->
+    <path d="M30,20 L45,25 L40,40 L25,35 Z" fill="white" opacity="0.6" />
+  </g>
+  
+  <!-- Stock Ticker Line -->
+  <path d="M30,120 L45,105 L60,115 L75,90 L90,100 L105,85 L120,95 L135,70 L150,80" 
+        stroke="#4CAF50" 
+        stroke-width="4" 
+        fill="none" 
+        stroke-linecap="round" 
+        stroke-linejoin="round" />
+        
+  <!-- Small Circle Elements -->
+  <circle cx="45" cy="105" r="4" fill="#4CAF50" />
+  <circle cx="75" cy="90" r="4" fill="#4CAF50" />
+  <circle cx="105" cy="85" r="4" fill="#4CAF50" />
+  <circle cx="135" cy="70" r="4" fill="#4CAF50" />
+</svg>

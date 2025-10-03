@@ -2,12 +2,15 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Inter, Poppins, Roboto_Mono } from "next/font/google";
 import "./globals.css";
+import Header from "@/app/components/Header";
+import UnauthHeader from "@/app/components/UnauthHeader";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
 
+// ...
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
@@ -45,11 +48,15 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Simulating authentication status - replace this with your actual auth logic
+  const isLoggedIn = false;
+
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} ${inter.variable} ${robotoMono.variable} antialiased`}
       >
+        {isLoggedIn ? <Header /> : <UnauthHeader />}
         {children}
       </body>
     </html>
