@@ -49,7 +49,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // Simulating authentication status - replace this with your actual auth logic
+  // TODO: Replace with actual auth logic later
   const isLoggedIn = false;
   
   // Mock user data for testing
