@@ -1,47 +1,76 @@
 @import "tailwindcss";
 
 :root {
-  /* Primary Colors */
-  --primary-blue: #1A374D;
-  --secondary-blue: #406882;
+  /* === PRIMARY BRAND COLORS === */
+  --primary-navy: #0A1929;
+  --primary-dark: #0F1419;
+  --secondary-navy: #132F4C;
+  --accent-cyan: #00D4FF;
+  --accent-electric: #00A8E8;
   
-  /* Accent Colors */
-  --profit-green: #4CAF50;
-  --loss-red: #F44336;
-  --warning-amber: #FFC107;
+  /* === CRYPTO/TRADING COLORS === */
+  --profit-green: #00E676;
+  --profit-green-dark: #00C853;
+  --loss-red: #FF1744;
+  --loss-red-dark: #D50000;
+  --warning-amber: #FFB300;
+  --warning-orange: #FF6D00;
   
-  /* Neutral Tones */
-  --dark-gray: #333333;
-  --mid-gray: #6C757D;
-  --light-gray: #E9ECEF;
-  --white: #FFFFFF;
+  /* === NEUTRAL PALETTE === */
+  --dark-bg: #0A0E27;
+  --card-dark: #141B2D;
+  --card-light: #1E2A3A;
+  --text-primary: #FFFFFF;
+  --text-secondary: #B0BEC5;
+  --text-muted: #78909C;
+  --border-subtle: #263238;
+  --border-light: #37474F;
   
-  /* Data Visualization Colors */
+  /* === DATA VISUALIZATION === */
   --chart-blue: #2196F3;
-  --chart-purple: #9C27B0;
-  --chart-orange: #FF9800;
-  --chart-teal: #009688;
+  --chart-purple: #AB47BC;
+  --chart-orange: #FF7043;
+  --chart-teal: #26A69A;
+  --chart-pink: #EC407A;
+  --chart-lime: #9CCC65;
   
-  /* Light Theme Default Colors */
-  --background: var(--white);
-  --foreground: var(--dark-gray);
-  --card-bg: var(--light-gray);
-  --nav-bg: var(--primary-blue);
-  --nav-text: var(--white);
-  --border-color: #dee2e6;
+  /* === GRADIENT BACKGROUNDS === */
+  --gradient-primary: linear-gradient(135deg, #0A1929 0%, #132F4C 100%);
+  --gradient-card: linear-gradient(135deg, #141B2D 0%, #1E2A3A 100%);
+  --gradient-accent: linear-gradient(90deg, #00D4FF 0%, #00A8E8 100%);
+  --gradient-profit: linear-gradient(90deg, #00E676 0%, #00C853 100%);
+  --gradient-loss: linear-gradient(90deg, #FF1744 0%, #D50000 100%);
   
-  /* Component Colors */
-  --button-primary: var(--primary-blue);
-  --button-secondary: var(--secondary-blue);
-  --link-color: var(--secondary-blue);
-  --input-border: var(--mid-gray);
+  /* === THEME VARIABLES === */
+  --background: var(--dark-bg);
+  --foreground: var(--text-primary);
+  --card-bg: var(--card-dark);
+  --nav-bg: var(--primary-navy);
+  --nav-text: var(--text-primary);
+  --border-color: var(--border-subtle);
+  
+  /* === COMPONENT COLORS === */
+  --button-primary: var(--accent-cyan);
+  --button-primary-hover: var(--accent-electric);
+  --button-secondary: var(--secondary-navy);
+  --link-color: var(--accent-cyan);
+  --input-bg: var(--card-light);
+  --input-border: var(--border-light);
   --positive-value: var(--profit-green);
   --negative-value: var(--loss-red);
   --alert-color: var(--warning-amber);
   
-  /* Font Variables */
+  /* === SHADOWS & EFFECTS === */
+  --shadow-sm: 0 2px 8px rgba(0, 212, 255, 0.1);
+  --shadow-md: 0 4px 16px rgba(0, 212, 255, 0.15);
+  --shadow-lg: 0 8px 32px rgba(0, 212, 255, 0.2);
+  --glow-cyan: 0 0 20px rgba(0, 212, 255, 0.3);
+  --glow-green: 0 0 20px rgba(0, 230, 118, 0.3);
+  --glow-red: 0 0 20px rgba(255, 23, 68, 0.3);
+  
+  /* === FONT VARIABLES === */
   --font-geist-sans: 'Inter', sans-serif;
-  --font-geist-mono: 'Fira Code', monospace;
+  --font-geist-mono: 'Roboto Mono', monospace;
   --font-body: var(--font-geist-sans);
   --font-headers: var(--font-geist-sans);
   --font-financial: var(--font-geist-mono);
@@ -52,81 +81,186 @@
   --color-foreground: var(--foreground);
 }
 
-@media (prefers-color-scheme: dark) {
+/* === LIGHT MODE (Optional Override) === */
+@media (prefers-color-scheme: light) {
   :root {
-    --background: #121212;
-    --foreground: #ededed;
-    --card-bg: #1e1e1e;
-    --nav-bg: #0d1b24;
-    --nav-text: var(--white);
-    --border-color: #2d3748;
+    --background: #F5F7FA;
+    --foreground: #1A1A1A;
+    --card-bg: #FFFFFF;
+    --nav-bg: var(--primary-navy);
+    --nav-text: var(--text-primary);
+    --border-color: #E0E0E0;
+    --text-secondary: #546E7A;
+    --text-muted: #90A4AE;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-body), Arial, Helvetica, sans-serif;
-  line-height: 1.5;
+/* === DARK MODE (Default) === */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: var(--dark-bg);
+    --foreground: var(--text-primary);
+    --card-bg: var(--card-dark);
+    --nav-bg: var(--primary-navy);
+    --nav-text: var(--text-primary);
+    --border-color: var(--border-subtle);
+  }
 }
 
-/* Typography Styles */
+/* === BASE STYLES === */
+body {
+  background: var(--background);
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgba(0, 212, 255, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(0, 230, 118, 0.05) 0%, transparent 50%);
+  color: var(--foreground);
+  font-family: var(--font-body), Arial, Helvetica, sans-serif;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* === TYPOGRAPHY === */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-headers), sans-serif;
   font-weight: 600;
-  color: var(--primary-blue);
+  color: var(--text-primary);
   margin-top: 1.5rem;
   margin-bottom: 1rem;
+  letter-spacing: -0.02em;
 }
 
 h1 {
-  font-size: 2.25rem;
-  line-height: 2.5rem;
+  font-size: 2.5rem;
+  line-height: 1.2;
   font-weight: 700;
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 h2 {
-  font-size: 1.875rem;
-  line-height: 2.25rem;
+  font-size: 2rem;
+  line-height: 1.3;
   font-weight: 600;
 }
 
 h3 {
   font-size: 1.5rem;
-  line-height: 2rem;
+  line-height: 1.4;
 }
 
 h4 {
   font-size: 1.25rem;
-  line-height: 1.75rem;
+  line-height: 1.5;
 }
 
 p {
   font-family: var(--font-body), sans-serif;
   margin-bottom: 1rem;
+  color: var(--text-secondary);
 }
 
+/* === BUTTONS === */
 button, .button {
   font-family: var(--font-body), sans-serif;
   font-weight: 500;
+  transition: all 0.3s ease;
+  cursor: pointer;
 }
 
+button:hover, .button:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+/* === NAVIGATION === */
 nav a {
   font-family: var(--font-headers), sans-serif;
   font-weight: 500;
+  transition: all 0.2s ease;
 }
 
-/* Financial Data Styling */
+nav a:hover {
+  color: var(--accent-cyan);
+}
+
+/* === FINANCIAL DATA STYLING === */
 .financial-data, .stock-price, .percentage, code, pre {
   font-family: var(--font-financial), monospace;
+  font-weight: 500;
+  letter-spacing: 0.02em;
 }
 
 .positive-value {
   color: var(--positive-value);
   font-family: var(--font-financial), monospace;
+  font-weight: 600;
 }
 
 .negative-value {
   color: var(--negative-value);
   font-family: var(--font-financial), monospace;
+  font-weight: 600;
+}
+
+/* === CARD STYLES === */
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  border-color: var(--accent-cyan);
+  box-shadow: var(--shadow-md);
+}
+
+/* === GLOW EFFECTS === */
+.glow-cyan {
+  box-shadow: var(--glow-cyan);
+}
+
+.glow-green {
+  box-shadow: var(--glow-green);
+}
+
+.glow-red {
+  box-shadow: var(--glow-red);
+}
+
+/* === SCROLLBAR STYLING === */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--card-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-light);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-cyan);
+}
+
+/* === ANIMATIONS === */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
 }
