@@ -26,12 +26,11 @@ export const MobileMenuButton: React.FC<MobileMenuButtonProps> = ({ isOpen, onTo
 
 export const UnauthenticatedActions: React.FC = () => (
   <>
-    <Link href="/login" className="hidden sm:inline-flex items-center px-4 py-2 text-sm font-medium text-white hover:text-[#00D4FF] transition-colors duration-200">
+    <Link href="/login" className="inline-flex items-center px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium text-white hover:text-[#00D4FF] transition-colors duration-200">
       Login
     </Link>
-    <Link href="/signup" className="inline-flex items-center px-5 py-2.5 text-sm font-semibold text-white bg-gradient-to-r from-[#00D4FF] to-[#00A8E8] rounded-full hover:shadow-lg hover:shadow-cyan-500/50 transition-all duration-300 transform hover:scale-105">
-      <span className="hidden sm:inline">Get Started</span>
-      <span className="sm:hidden">Sign Up</span>
+    <Link href="/signup" className="inline-flex items-center px-4 sm:px-5 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold text-white bg-gradient-to-r from-[#00D4FF] to-[#00A8E8] rounded-full hover:shadow-lg hover:shadow-cyan-500/50 transition-all duration-300 transform hover:scale-105">
+      Get Started
     </Link>
   </>
 );

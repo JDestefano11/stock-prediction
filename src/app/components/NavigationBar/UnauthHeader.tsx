@@ -1,8 +1,8 @@
-// c:\Users\deste\OneDrive\Desktop\stock-prediction\src\app\components\UnauthHeader.tsx
+
 'use client';
 import React from 'react';
 import Link from 'next/link';
-import Logo from '../Logo';
+import Logo from '../../Logo';
 
 const UnauthHeader: React.FC = () => {
   return (
