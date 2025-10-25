@@ -20,7 +20,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ isLoggedIn = false, user,
   };
 
   return (
-    <header className={`fixed top-[62px] left-0 right-0 z-50 transition-all duration-300 border-b border-[#263238] ${scrolled ? 'bg-[#0A1929]/95 backdrop-blur-md shadow-lg' : 'bg-[#0A1929]'}`}>
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-[#263238] ${scrolled ? 'bg-[#0A1929]/95 backdrop-blur-md shadow-lg' : 'bg-[#0A1929]'}`}>
       <nav className="container mx-auto px-4 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Left Section */}

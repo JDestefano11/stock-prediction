@@ -3,7 +3,6 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { Inter, Poppins, Roboto_Mono } from "next/font/google";
 import "./globals.css";
 import NavigationBar from "@/app/components/NavigationBar/NavigationBar";
-import MarketTopBar from "@/app/components/Topbar/MarketTopBar";
 
 
 const geistSans = Geist({
@@ -64,9 +63,8 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} ${inter.variable} ${robotoMono.variable} antialiased`}
       >
-        <MarketTopBar />
         <NavigationBar isLoggedIn={isLoggedIn} user={isLoggedIn ? mockUser : undefined} />
-        <main className="pt-[126px] lg:pt-[142px]">
+        <main className="pt-16 lg:pt-20">
           {children}
         </main>
       </body>
