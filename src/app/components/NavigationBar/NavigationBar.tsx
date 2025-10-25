@@ -1,8 +1,8 @@
 'use client';
 
 import React from 'react';
-import { NavigationBarProps } from './types';
-import { useScrollBehavior, useClickOutside, useNavigationState } from './hooks';
+import { NavigationBarProps } from '../../utils/types';
+import { useScrollBehavior, useClickOutside, useNavigationState } from '../../utils/hooks';
 import Logo from './Logo';
 import { DesktopNavLinks, MobileNavLinks } from './NavLinks';
 import { NotificationsButton, MobileMenuButton, UnauthenticatedActions } from './ActionButtons';

@@ -1,6 +1,13 @@
 import React from 'react';
 import Link from 'next/link';
-import { NAV_LINKS } from './constants';
+
+const NAV_LINKS = [
+  { href: '/dashboard', label: 'Dashboard', icon: '📊' },
+  { href: '/markets', label: 'Markets', icon: '📈' },
+  { href: '/watchlist', label: 'Watchlist', icon: '⭐' },
+  { href: '/alerts', label: 'Alerts', icon: '🔔' },
+  { href: '/insights', label: 'AI Insights', icon: '🤖' },
+];
 
 interface NavLinkProps {
   href: string;

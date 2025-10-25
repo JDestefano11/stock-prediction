@@ -1,8 +1,14 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { User } from './types';
-import { PROFILE_MENU_ITEMS } from './constants';
+import { User } from '../../utils/types';
+
+const PROFILE_MENU_ITEMS = [
+  { href: '/profile', label: 'My Profile', icon: '👤' },
+  { href: '/settings', label: 'Settings', icon: '⚙️' },
+  { href: '/subscriptions', label: 'Subscription', icon: '💎' },
+  { href: '/help', label: 'Help Center', icon: '❓' },
+] as const;
 
 interface ProfileAvatarProps {
   user?: User;
