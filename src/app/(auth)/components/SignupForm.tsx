@@ -6,6 +6,9 @@ import Link from 'next/link';
 import PasswordStrengthIndicator from '@/app/components/PasswordStrengthIndicator';
 import { isPasswordValid } from '@/app/utils/passwordValidation';
 
+const inputClass =
+  "mt-1 block w-full px-4 py-3 bg-[#1E293B] border border-[#334155] rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#00D4FF] focus:border-transparent";
+
 export default function SignupForm() {
   const [formData, setFormData] = useState({
     name: '',
@@ -21,64 +24,70 @@ export default function SignupForm() {
     e.preventDefault();
     setIsLoading(true);
     setError('');
-    
-    // Validate passwords match
+
     if (formData.password !== formData.confirmPassword) {
       setError('Passwords do not match');
       setIsLoading(false);
       return;
     }
 
-    // Validate password strength
     if (!isPasswordValid(formData.password)) {
       setError('Password does not meet all requirements');
       setIsLoading(false);
       return;
     }
-    
+
     try {
       const response = await fetch('/api/auth/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          password: formData.password,
-        }),
+        body: JSON.stringify(formData),
       });
 
       if (response.ok) {
         const data = await response.json();
         localStorage.setItem('authToken', data.token);
-        router.push('/dashboard');
+        router.push('/login');
       } else {
         const errorData = await response.json();
         setError(errorData.error || 'Signup failed');
       }
-    } catch (error) {
-      console.error('Error during signup:', error);
+    } catch {
       setError('Network error. Please try again.');
     } finally {
       setIsLoading(false);
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
+  const handleChange = ({ target: { name, value } }: React.ChangeEvent<HTMLInputElement>) => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
+
+  const renderInput = (id: string, type: string, placeholder: string, value: string) => (
+    <div>
+      <label htmlFor={id} className="block text-sm font-medium text-gray-300">{placeholder}</label>
+      <input
+        id={id}
+        name={id}
+        type={type}
+        required
+        value={value}
+        onChange={handleChange}
+        className={inputClass}
+        placeholder={placeholder}
+      />
+    </div>
+  );
 
   return (
     <>
       <div className="text-center">
         <h2 className="text-3xl font-extrabold text-white">Create Account</h2>
-        <p className="mt-2 text-sm text-gray-400">
-          Start your free trial today
-        </p>
+        <p className="mt-2 text-sm text-gray-400">Start your free trial today</p>
       </div>
-      
+
       {error && (
         <div className="mt-4 bg-red-500/10 border border-red-500/20 rounded-lg p-3">
           <p className="text-red-400 text-sm text-center">{error}</p>
@@ -87,70 +96,11 @@ export default function SignupForm() {
 
       <form className="mt-8 space-y-5" onSubmit={handleSubmit}>
         <div className="space-y-4">
-          <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-300">
-              Full Name
-            </label>
-            <input
-              id="name"
-              name="name"
-              type="text"
-              required
-              value={formData.name}
-              onChange={handleChange}
-              className="mt-1 block w-full px-4 py-3 bg-[#1E293B] border border-[#334155] rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#00D4FF] focus:border-transparent"
-              placeholder="John Doe"
-            />
-          </div>
-          
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-300">
-              Email address
-            </label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              required
-              value={formData.email}
-              onChange={handleChange}
-              className="mt-1 block w-full px-4 py-3 bg-[#1E293B] border border-[#334155] rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#00D4FF] focus:border-transparent"
-              placeholder="you@example.com"
-            />
-          </div>
-          
-          <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-300">
-              Password
-            </label>
-            <input
-              id="password"
-              name="password"
-              type="password"
-              required
-              value={formData.password}
-              onChange={handleChange}
-              className="mt-1 block w-full px-4 py-3 bg-[#1E293B] border border-[#334155] rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#00D4FF] focus:border-transparent"
-              placeholder="••••••••"
-            />
-            <PasswordStrengthIndicator password={formData.password} />
-          </div>
-          
-          <div>
-            <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-300">
-              Confirm Password
-            </label>
-            <input
-              id="confirmPassword"
-              name="confirmPassword"
-              type="password"
-              required
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              className="mt-1 block w-full px-4 py-3 bg-[#1E293B] border border-[#334155] rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#00D4FF] focus:border-transparent"
-              placeholder="••••••••"
-            />
-          </div>
+          {renderInput('name', 'text', 'Full Name', formData.name)}
+          {renderInput('email', 'email', 'Email address', formData.email)}
+          {renderInput('password', 'password', 'Password', formData.password)}
+          <PasswordStrengthIndicator password={formData.password} />
+          {renderInput('confirmPassword', 'password', 'Confirm Password', formData.confirmPassword)}
         </div>
 
         <div className="flex items-start">
@@ -163,13 +113,8 @@ export default function SignupForm() {
           />
           <label htmlFor="terms" className="ml-2 block text-sm text-gray-400">
             I agree to the{' '}
-            <a href="#" className="text-[#00D4FF] hover:text-[#00A8E8]">
-              Terms of Service
-            </a>
-            {' '}and{' '}
-            <a href="#" className="text-[#00D4FF] hover:text-[#00A8E8]">
-              Privacy Policy
-            </a>
+            <a href="#" className="text-[#00D4FF] hover:text-[#00A8E8]">Terms of Service</a> and{' '}
+            <a href="#" className="text-[#00D4FF] hover:text-[#00A8E8]">Privacy Policy</a>
           </label>
         </div>
 
@@ -185,14 +130,11 @@ export default function SignupForm() {
           </button>
         </div>
       </form>
-      
+
       <div className="text-center mt-6">
         <p className="text-sm text-gray-400">
           Already have an account?{' '}
-          <Link 
-            href="/login" 
-            className="font-medium text-[#00D4FF] hover:text-[#00A8E8] transition-colors"
-          >
+          <Link href="/login" className="font-medium text-[#00D4FF] hover:text-[#00A8E8] transition-colors">
             Sign in
           </Link>
         </p>
