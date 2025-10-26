@@ -5,7 +5,7 @@ import { NavigationBarProps } from '../../utils/types';
 import { useScrollBehavior, useClickOutside, useNavigationState } from '../../utils/hooks';
 import Logo from './Logo';
 import { DesktopNavLinks, MobileNavLinks } from './NavLinks';
-import { NotificationsButton, MobileMenuButton, UnauthenticatedActions, TickerTape } from './ActionButtons';
+import { NotificationsButton, MobileMenuButton, UnauthenticatedActions, TickerTape, BottomBar } from './ActionButtons';
 import { ProfileButton } from './ProfileMenu';
 import { SearchBar } from './SearchBar';
 
@@ -35,30 +35,57 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ isLoggedIn = false, user,
       `}>
         <nav className="container mx-auto px-4 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
-          {/* Left Section - Logo */}
-          <div className="flex items-center">
-            <Logo />
+          {/* Mobile Layout */}
+          <div className="lg:hidden flex items-center justify-between w-full">
+            {/* Left - Mobile Menu Button */}
+            <div className="flex items-center">
+              <MobileMenuButton isOpen={isMobileMenuOpen} onToggle={toggleMobileMenu} />
+            </div>
+
+            {/* Center - Logo */}
+            <div className="absolute left-1/2 transform -translate-x-1/2">
+              <Logo />
+            </div>
+
+            {/* Right - Profile & Notifications */}
+            <div className="flex items-center gap-2">
+              {isLoggedIn ? (
+                <>
+                  <NotificationsButton />
+                  <ProfileButton user={user} isOpen={isProfileOpen} onToggle={toggleProfile} onLogout={handleLogout} />
+                </>
+              ) : (
+                <UnauthenticatedActions />
+              )}
+            </div>
           </div>
 
-          {/* Center Section - Nav Links */}
-          <DesktopNavLinks isLoggedIn={isLoggedIn} />
+          {/* Desktop Layout */}
+          <div className="hidden lg:flex items-center justify-between w-full">
+            {/* Left Section - Logo */}
+            <div className="flex items-center">
+              <Logo />
+            </div>
 
-          {/* Search Bar */}
-          {isLoggedIn && <SearchBar />}
+            {/* Center Section - Nav Links */}
+            <DesktopNavLinks isLoggedIn={isLoggedIn} />
 
-          {/* Right Section - Actions */}
-          <div className="flex items-center gap-2 lg:gap-3 ml-4 lg:ml-8">
-            {!isLoggedIn ? (
-              <UnauthenticatedActions />
-            ) : (
-              <div className="flex items-center gap-2 lg:gap-3">
-                <NotificationsButton />
-                {/* Divider */}
-                <div className="hidden lg:block w-px h-8 bg-gradient-to-b from-transparent via-[#263238] to-transparent" />
-                <ProfileButton user={user} isOpen={isProfileOpen} onToggle={toggleProfile} onLogout={handleLogout} />
-              </div>
-            )}
-            <MobileMenuButton isOpen={isMobileMenuOpen} onToggle={toggleMobileMenu} />
+            {/* Search Bar */}
+            {isLoggedIn && <SearchBar />}
+
+            {/* Right Section - Actions */}
+            <div className="flex items-center gap-2 lg:gap-3 ml-4 lg:ml-8">
+              {!isLoggedIn ? (
+                <UnauthenticatedActions />
+              ) : (
+                <div className="flex items-center gap-2 lg:gap-3">
+                  <NotificationsButton />
+                  {/* Divider */}
+                  <div className="hidden lg:block w-px h-8 bg-gradient-to-b from-transparent via-[#263238] to-transparent" />
+                  <ProfileButton user={user} isOpen={isProfileOpen} onToggle={toggleProfile} onLogout={handleLogout} />
+                </div>
+              )}
+            </div>
           </div>
         </div>
 
@@ -66,6 +93,9 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ isLoggedIn = false, user,
           {isMobileMenuOpen && <MobileNavLinks isLoggedIn={isLoggedIn} />}
         </nav>
       </div>
+
+      {/* Bottom Bar */}
+      <BottomBar />
 
       <style jsx>{`
         @keyframes fadeIn {

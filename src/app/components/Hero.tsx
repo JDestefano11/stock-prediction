@@ -4,34 +4,8 @@ import React, { useEffect, useRef } from 'react';
 import Link from 'next/link';
 
 const Hero: React.FC = () => {
-  const tickerRef = useRef<HTMLDivElement>(null);
   const chartRef = useRef<HTMLDivElement>(null);
   const screenerRef = useRef<HTMLDivElement>(null);
-
-  // TradingView Ticker Tape Widget
-  useEffect(() => {
-    if (!tickerRef.current) return;
-
-    const script = document.createElement('script');
-    script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js';
-    script.async = true;
-    script.innerHTML = JSON.stringify({
-      symbols: [
-        { proName: 'FOREXCOM:SPXUSD', title: 'S&P 500' },
-        { proName: 'FOREXCOM:NSXUSD', title: 'US 100' },
-        { proName: 'FX_IDC:EURUSD', title: 'EUR/USD' },
-        { proName: 'BITSTAMP:BTCUSD', title: 'Bitcoin' },
-        { proName: 'COINBASE:ETHUSD', title: 'Ethereum' },
-      ],
-      showSymbolLogo: true,
-      colorTheme: 'dark',
-      isTransparent: true,
-      displayMode: 'adaptive',
-      locale: 'en',
-    });
-
-    tickerRef.current.appendChild(script);
-  }, []);
 
   // TradingView Advanced Chart Widget
   useEffect(() => {
@@ -143,17 +117,11 @@ const Hero: React.FC = () => {
   }, []);
 
   return (
-    <section className="relative bg-gradient-to-br from-[#0A0E27] to-[#0A1929]">
-      {/* Ticker Tape at Top */}
-      <div className="w-full bg-[#0A1929]/90 backdrop-blur-sm border-b border-[#132F4C]">
-        <div className="tradingview-widget-container" ref={tickerRef}>
-          <div className="tradingview-widget-container__widget"></div>
-        </div>
-      </div>
-
-      <div className="container mx-auto px-4 lg:px-8 py-6">
+    <section className="relative min-h-screen bg-gradient-to-br from-[#0A0E27] via-[#0A1929] to-[#0F1419] overflow-hidden">
+      {/* Animated Background Elements */}
+      <div className="container mx-auto px-4 lg:px-8 h-full flex flex-col justify-center">
         {/* Hero Header */}
-        <div className="text-center mb-12">
+        <div className="text-center pt-32 pb-12">
 
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4 bg-clip-text text-transparent bg-gradient-to-r from-[#00D4FF] to-[#00A8E8]">
             AI-Powered Market Analysis
