@@ -101,7 +101,7 @@ export const ProfileButton: React.FC<ProfileButtonProps> = ({ user, isOpen, onTo
     <button 
       onClick={onToggle} 
       className="
-        profile-button flex items-center space-x-3 
+        profile-button flex items-center space-x-2
         px-2 py-1.5 rounded-xl
         hover:bg-[#00D4FF]/5
         focus:outline-none focus:ring-2 focus:ring-[#00D4FF]/30
@@ -110,15 +110,12 @@ export const ProfileButton: React.FC<ProfileButtonProps> = ({ user, isOpen, onTo
       " 
       aria-expanded={isOpen} 
       aria-haspopup="true"
+      aria-label="User menu"
     >
-      <div className="hidden lg:block text-right">
-        <p className="text-sm font-medium text-white group-hover:text-[#00D4FF] transition-colors">{user?.name || 'User'}</p>
-        <p className="text-xs text-[#B0BEC5]">{user?.email || 'user@example.com'}</p>
-      </div>
       <ProfileAvatar user={user} />
       {/* Dropdown indicator */}
       <svg 
-        className={`hidden lg:block w-4 h-4 text-white/60 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
+        className={`w-4 h-4 text-white/60 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
         fill="none" 
         stroke="currentColor" 
         viewBox="0 0 24 24"

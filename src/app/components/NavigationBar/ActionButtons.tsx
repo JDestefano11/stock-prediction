@@ -100,3 +100,39 @@ export const UnauthenticatedActions: React.FC = () => (
     </Link>
   </>
 );
+
+export const TickerTape: React.FC = () => {
+  const tickerRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    if (!tickerRef.current) return;
+
+    const script = document.createElement('script');
+    script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js';
+    script.async = true;
+    script.innerHTML = JSON.stringify({
+      symbols: [
+        { proName: 'FOREXCOM:SPXUSD', title: 'S&P 500' },
+        { proName: 'FOREXCOM:NSXUSD', title: 'US 100' },
+        { proName: 'FX_IDC:EURUSD', title: 'EUR/USD' },
+        { proName: 'BITSTAMP:BTCUSD', title: 'Bitcoin' },
+        { proName: 'COINBASE:ETHUSD', title: 'Ethereum' },
+      ],
+      showSymbolLogo: true,
+      colorTheme: 'dark',
+      isTransparent: true,
+      displayMode: 'adaptive',
+      locale: 'en',
+    });
+
+    tickerRef.current.appendChild(script);
+  }, []);
+
+  return (
+    <div className="w-full bg-[#0A1929]/90 backdrop-blur-sm border-b border-[#132F4C]">
+      <div className="tradingview-widget-container" ref={tickerRef}>
+        <div className="tradingview-widget-container__widget"></div>
+      </div>
+    </div>
+  );
+};

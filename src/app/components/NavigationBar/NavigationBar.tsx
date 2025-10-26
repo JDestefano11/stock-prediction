@@ -5,8 +5,9 @@ import { NavigationBarProps } from '../../utils/types';
 import { useScrollBehavior, useClickOutside, useNavigationState } from '../../utils/hooks';
 import Logo from './Logo';
 import { DesktopNavLinks, MobileNavLinks } from './NavLinks';
-import { NotificationsButton, MobileMenuButton, UnauthenticatedActions } from './ActionButtons';
+import { NotificationsButton, MobileMenuButton, UnauthenticatedActions, TickerTape } from './ActionButtons';
 import { ProfileButton } from './ProfileMenu';
+import { SearchBar } from './SearchBar';
 
 const NavigationBar: React.FC<NavigationBarProps> = ({ isLoggedIn = false, user, onLogout }) => {
   const { isProfileOpen, isMobileMenuOpen, toggleProfile, toggleMobileMenu, closeAll } = useNavigationState();
@@ -20,42 +21,51 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ isLoggedIn = false, user,
   };
 
   return (
-    <header 
-      className={`
-        fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out
+    <header className="fixed top-0 left-0 right-0 z-50">
+      {/* Ticker Tape at the top */}
+      <TickerTape />
+      
+      {/* Navigation Bar */}
+      <div className={`
+        transition-all duration-500 ease-out
         ${scrolled 
           ? 'bg-[#0A1929]/85 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,212,255,0.12)] border-b border-[#00D4FF]/20' 
           : 'bg-[#0A1929]/95 backdrop-blur-sm border-b border-[#263238]/60'
         }
-      `}
-    >
-      <nav className="container mx-auto px-4 lg:px-8">
+      `}>
+        <nav className="container mx-auto px-4 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
-          {/* Left Section */}
-          <div className="flex items-center space-x-8">
+          {/* Left Section - Logo */}
+          <div className="flex items-center">
             <Logo />
-            {isLoggedIn && <DesktopNavLinks />}
           </div>
 
-          {/* Right Section */}
-          <div className="flex items-center space-x-3 lg:space-x-4">
+          {/* Center Section - Nav Links */}
+          <DesktopNavLinks isLoggedIn={isLoggedIn} />
+
+          {/* Search Bar */}
+          {isLoggedIn && <SearchBar />}
+
+          {/* Right Section - Actions */}
+          <div className="flex items-center gap-2 lg:gap-3 ml-4 lg:ml-8">
             {!isLoggedIn ? (
               <UnauthenticatedActions />
             ) : (
-              <>
+              <div className="flex items-center gap-2 lg:gap-3">
                 <NotificationsButton />
                 {/* Divider */}
                 <div className="hidden lg:block w-px h-8 bg-gradient-to-b from-transparent via-[#263238] to-transparent" />
                 <ProfileButton user={user} isOpen={isProfileOpen} onToggle={toggleProfile} onLogout={handleLogout} />
-              </>
+              </div>
             )}
-            {isLoggedIn && <MobileMenuButton isOpen={isMobileMenuOpen} onToggle={toggleMobileMenu} />}
+            <MobileMenuButton isOpen={isMobileMenuOpen} onToggle={toggleMobileMenu} />
           </div>
         </div>
 
-        {/* Mobile Menu */}
-        {isLoggedIn && isMobileMenuOpen && <MobileNavLinks />}
-      </nav>
+          {/* Mobile Menu */}
+          {isMobileMenuOpen && <MobileNavLinks isLoggedIn={isLoggedIn} />}
+        </nav>
+      </div>
 
       <style jsx>{`
         @keyframes fadeIn {
