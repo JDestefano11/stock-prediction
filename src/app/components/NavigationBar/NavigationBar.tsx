@@ -20,7 +20,15 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ isLoggedIn = false, user,
   };
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-[#263238] ${scrolled ? 'bg-[#0A1929]/95 backdrop-blur-md shadow-lg' : 'bg-[#0A1929]'}`}>
+    <header 
+      className={`
+        fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out
+        ${scrolled 
+          ? 'bg-[#0A1929]/85 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,212,255,0.12)] border-b border-[#00D4FF]/20' 
+          : 'bg-[#0A1929]/95 backdrop-blur-sm border-b border-[#263238]/60'
+        }
+      `}
+    >
       <nav className="container mx-auto px-4 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Left Section */}
@@ -30,12 +38,14 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ isLoggedIn = false, user,
           </div>
 
           {/* Right Section */}
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-3 lg:space-x-4">
             {!isLoggedIn ? (
               <UnauthenticatedActions />
             ) : (
               <>
                 <NotificationsButton />
+                {/* Divider */}
+                <div className="hidden lg:block w-px h-8 bg-gradient-to-b from-transparent via-[#263238] to-transparent" />
                 <ProfileButton user={user} isOpen={isProfileOpen} onToggle={toggleProfile} onLogout={handleLogout} />
               </>
             )}
