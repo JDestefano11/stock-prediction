@@ -180,7 +180,7 @@ export const BottomBar: React.FC = () => {
           {/* Left Section - Market Status */}
           <div className="flex items-center gap-6">
             <div className="flex items-center gap-2">
-              <span className="relative flex h-2.5 w-2.5">
+              <span className="relative flex h-2.5 w-2.5 market-status-indicator">
                 <span className={`animate-ping absolute inline-flex h-full w-full rounded-full ${isMarketOpen ? 'bg-green-400' : 'bg-red-500'} opacity-75`}></span>
                 <span className={`relative inline-flex rounded-full h-2.5 w-2.5 ${isMarketOpen ? 'bg-green-400' : 'bg-red-500'}`}></span>
               </span>
@@ -221,7 +221,7 @@ export const BottomBar: React.FC = () => {
             className="w-full flex items-center justify-between px-4 py-3 hover:bg-[#0F1419]/30 transition-colors active:bg-[#0F1419]/50"
           >
             <div className="flex items-center gap-3">
-              <span className="relative flex h-2.5 w-2.5">
+              <span className="relative flex h-2.5 w-2.5 market-status-indicator">
                 <span className={`animate-ping absolute inline-flex h-full w-full rounded-full ${isMarketOpen ? 'bg-green-400' : 'bg-red-500'} opacity-75`}></span>
                 <span className={`relative inline-flex rounded-full h-2.5 w-2.5 ${isMarketOpen ? 'bg-green-400' : 'bg-red-500'}`}></span>
               </span>

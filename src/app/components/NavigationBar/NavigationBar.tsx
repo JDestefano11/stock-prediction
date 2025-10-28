@@ -2,18 +2,16 @@
 
 import React from 'react';
 import { NavigationBarProps } from '../../utils/types';
-import { useScrollBehavior, useClickOutside, useNavigationState } from '../../utils/hooks';
+import { useScrollBehavior, useNavigationState } from '../../utils/hooks';
 import Logo from './Logo';
 import { DesktopNavLinks, MobileNavLinks } from './NavLinks';
 import { NotificationsButton, MobileMenuButton, UnauthenticatedActions, TickerTape, BottomBar } from './ActionButtons';
 import { ProfileButton } from './ProfileMenu';
-import { SearchBar } from './SearchBar';
+import { SearchBar } from './Search/SearchBar';
 
 const NavigationBar: React.FC<NavigationBarProps> = ({ isLoggedIn = false, user, onLogout }) => {
   const { isProfileOpen, isMobileMenuOpen, toggleProfile, toggleMobileMenu, closeAll } = useNavigationState();
   const scrolled = useScrollBehavior(20);
-
-  useClickOutside(['.profile-dropdown', '.profile-button'], () => isProfileOpen && closeAll());
 
   const handleLogout = () => {
     onLogout?.();

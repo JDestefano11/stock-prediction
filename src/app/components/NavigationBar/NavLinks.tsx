@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { SearchBar } from './Search/SearchBar';
 
 // Public navigation links (when not logged in)
 const PUBLIC_NAV_LINKS = [
@@ -71,18 +72,7 @@ export const MobileNavLinks: React.FC<NavLinksProps> = ({ isLoggedIn = false }) 
       
       {/* Search Bar for Mobile */}
       <div className="px-4 py-3 border-t border-[#263238]/50">
-        <div className="relative">
-          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <svg className="h-5 w-5 text-white/40" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
-          </div>
-          <input
-            type="text"
-            className="block w-full pl-10 pr-3 py-2 border border-[#334155] rounded-lg bg-[#1E293B]/50 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-[#00D4FF] focus:border-transparent"
-            placeholder="Search stocks, news..."
-          />
-        </div>
+        <SearchBar />
       </div>
     </div>
   );
