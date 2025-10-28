@@ -7,13 +7,9 @@ export const SearchBar: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
 
   return (
-    <div className="hidden lg:flex items-center">
+    <div className="flex items-center w-full">
       <div 
-        className={`
-          relative flex items-center
-          transition-all duration-300 ease-out
-          ${isFocused ? 'w-80' : 'w-64'}
-        `}
+        className="relative flex items-center w-full transition-all duration-300 ease-out"
       >
         {/* Search Icon */}
         <div className="absolute left-3 pointer-events-none">

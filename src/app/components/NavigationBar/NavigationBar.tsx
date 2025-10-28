@@ -61,27 +61,31 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ isLoggedIn = false, user,
           </div>
 
           {/* Desktop Layout */}
-          <div className="hidden lg:flex items-center justify-between w-full">
+          <div className="hidden lg:flex items-center justify-between w-full gap-6">
             {/* Left Section - Logo */}
-            <div className="flex items-center">
+            <div className="flex items-center flex-shrink-0">
               <Logo />
             </div>
 
             {/* Center Section - Nav Links */}
-            <DesktopNavLinks isLoggedIn={isLoggedIn} />
+            <div className="flex-shrink-0">
+              <DesktopNavLinks isLoggedIn={isLoggedIn} />
+            </div>
 
-            {/* Search Bar */}
-            {isLoggedIn && <SearchBar />}
+            {/* Search Bar - Always visible on desktop */}
+            <div className="flex-1 max-w-md mx-4">
+              <SearchBar />
+            </div>
 
             {/* Right Section - Actions */}
-            <div className="flex items-center gap-2 lg:gap-3 ml-4 lg:ml-8">
+            <div className="flex items-center gap-3 flex-shrink-0">
               {!isLoggedIn ? (
                 <UnauthenticatedActions />
               ) : (
-                <div className="flex items-center gap-2 lg:gap-3">
+                <div className="flex items-center gap-3">
                   <NotificationsButton />
                   {/* Divider */}
-                  <div className="hidden lg:block w-px h-8 bg-gradient-to-b from-transparent via-[#263238] to-transparent" />
+                  <div className="w-px h-8 bg-gradient-to-b from-transparent via-[#263238] to-transparent" />
                   <ProfileButton user={user} isOpen={isProfileOpen} onToggle={toggleProfile} onLogout={handleLogout} />
                 </div>
               )}
