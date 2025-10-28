@@ -117,11 +117,11 @@ const Hero: React.FC = () => {
   }, []);
 
   return (
-    <section className="relative min-h-screen bg-gradient-to-br from-[#0A0E27] via-[#0A1929] to-[#0F1419] overflow-hidden">
+    <section className="relative min-h-screen bg-[#0A0E27] overflow-hidden">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=2070')] bg-cover bg-center opacity-15"></div>
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0A0E27]/80 via-[#0A1929]/90 to-[#0F1419]"></div>
+        <div className="absolute inset-0 bg-[#0A0E27]/90"></div>
       </div>
 
       <div className="container mx-auto px-4 lg:px-8 h-full flex flex-col justify-center relative z-10">

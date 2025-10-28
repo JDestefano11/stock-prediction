@@ -17,7 +17,7 @@ const Logo: React.FC = () => (
     
     {/* Text */}
     <span className="text-lg sm:text-xl lg:text-2xl font-bold bg-gradient-to-r from-white to-white group-hover:from-[#00D4FF] group-hover:to-[#00A8E8] bg-clip-text text-transparent transition-all duration-300">
-      StockPro
+      PulseIQ
     </span>
   </Link>
 );
