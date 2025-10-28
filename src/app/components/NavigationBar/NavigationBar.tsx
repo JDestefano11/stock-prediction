@@ -70,10 +70,12 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ isLoggedIn = false, user,
               <DesktopNavLinks isLoggedIn={isLoggedIn} />
             </div>
 
-            {/* Search Bar - Always visible on desktop */}
-            <div className="flex-1 max-w-md mx-4">
-              <SearchBar />
-            </div>
+            {/* Search Bar - Only visible when logged in */}
+            {isLoggedIn && (
+              <div className="flex-1 max-w-md mx-4">
+                <SearchBar />
+              </div>
+            )}
 
             {/* Right Section - Actions */}
             <div className="flex items-center gap-3 flex-shrink-0">

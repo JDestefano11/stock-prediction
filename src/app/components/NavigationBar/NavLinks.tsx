@@ -70,10 +70,12 @@ export const MobileNavLinks: React.FC<NavLinksProps> = ({ isLoggedIn = false }) 
         ))}
       </div>
       
-      {/* Search Bar for Mobile */}
-      <div className="px-4 py-3 border-t border-[#263238]/50">
-        <SearchBar />
-      </div>
+      {/* Search Bar for Mobile - Only when logged in */}
+      {isLoggedIn && (
+        <div className="px-4 py-3 border-t border-[#263238]/50">
+          <SearchBar />
+        </div>
+      )}
     </div>
   );
 };
