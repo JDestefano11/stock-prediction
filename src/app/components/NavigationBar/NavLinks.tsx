@@ -6,13 +6,14 @@ import Link from 'next/link';
 // Public navigation links (when not logged in)
 const PUBLIC_NAV_LINKS = [
   { href: '/', label: 'Home' },
-  { href: '/about', label: 'About' },
+  { href: '/explore', label: 'Explore' },
   { href: '/contact', label: 'Contact' },
 ];
 
 // Authenticated navigation links (when logged in)
 const AUTH_NAV_LINKS = [
   { href: '/', label: 'Home' },
+  { href: '/explore', label: 'Explore' },
   { href: '/portfolio', label: 'Portfolio' },
   { href: '/analytics', label: 'Analytics' },
   { href: '/dashboard', label: 'Dashboard' },
