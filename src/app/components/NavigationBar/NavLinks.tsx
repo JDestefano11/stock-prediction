@@ -8,7 +8,6 @@ const PUBLIC_NAV_LINKS = [
   { href: '/', label: 'Home' },
   { href: '/about', label: 'About' },
   { href: '/contact', label: 'Contact' },
-  { href: '/dashboard', label: 'Dashboard' },
 ];
 
 // Authenticated navigation links (when logged in)
