@@ -1,20 +1,14 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import Link from 'next/link';
+import { useTradingView } from '@/app/utils/tradingViewHook';
 
 const Hero: React.FC = () => {
-  const chartRef = useRef<HTMLDivElement>(null);
-  const screenerRef = useRef<HTMLDivElement>(null);
-
-  // TradingView Advanced Chart Widget
-  useEffect(() => {
-    if (!chartRef.current) return;
-
-    const script = document.createElement('script');
-    script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js';
-    script.async = true;
-    script.innerHTML = JSON.stringify({
+  // Advanced Chart using custom hook
+  const chartRef = useTradingView({
+    widgetType: 'AdvancedChart',
+    config: {
       width: '100%',
       height: '600',
       symbol: 'NASDAQ:AAPL',
@@ -28,21 +22,15 @@ const Hero: React.FC = () => {
       gridColor: 'rgba(38, 50, 56, 0.3)',
       hide_top_toolbar: false,
       hide_legend: false,
-      save_image: false,
-      container_id: 'tradingview_chart'
-    });
+      save_image: false
+    },
+    scriptSrc: 'https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js'
+  });
 
-    chartRef.current.appendChild(script);
-  }, []);
-
-  // TradingView Market Overview Widget
-  useEffect(() => {
-    if (!screenerRef.current) return;
-
-    const script = document.createElement('script');
-    script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js';
-    script.async = true;
-    script.innerHTML = JSON.stringify({
+  // Market Overview using custom hook
+  const screenerRef = useTradingView({
+    widgetType: 'MarketOverview',
+    config: {
       colorTheme: 'dark',
       dateRange: '12M',
       showChart: true,
@@ -111,10 +99,9 @@ const Hero: React.FC = () => {
           originalTitle: 'Forex'
         }
       ]
-    });
-
-    screenerRef.current.appendChild(script);
-  }, []);
+    },
+    scriptSrc: 'https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js'
+  });
 
   return (
     <section className="relative min-h-screen bg-[#0A0E27] overflow-hidden">
@@ -163,9 +150,7 @@ const Hero: React.FC = () => {
               <h3 className="text-lg font-bold text-white">Advanced Chart</h3>
               <p className="text-sm text-[#B0BEC5]">Full-featured trading chart</p>
             </div>
-            <div className="tradingview-widget-container h-[600px]" ref={chartRef}>
-              <div className="tradingview-widget-container__widget h-full"></div>
-            </div>
+            <div className="h-[600px]" ref={chartRef}></div>
           </div>
 
           {/* Right: Market Overview */}
@@ -174,9 +159,7 @@ const Hero: React.FC = () => {
               <h3 className="text-lg font-bold text-white">Market Overview</h3>
               <p className="text-sm text-[#B0BEC5]">Global markets & indices</p>
             </div>
-            <div className="tradingview-widget-container h-[600px]" ref={screenerRef}>
-              <div className="tradingview-widget-container__widget h-full"></div>
-            </div>
+            <div className="h-[600px]" ref={screenerRef}></div>
           </div>
         </div>
       </div>
