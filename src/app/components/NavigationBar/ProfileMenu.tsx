@@ -4,10 +4,10 @@ import Image from 'next/image';
 import { User } from '../../utils/types';
 
 const PROFILE_MENU_ITEMS = [
-  { href: '/profile', label: 'My Profile', icon: '👤' },
-  { href: '/settings', label: 'Settings', icon: '⚙️' },
-  { href: '/subscriptions', label: 'Subscription', icon: '💎' },
-  { href: '/help', label: 'Help Center', icon: '❓' },
+  { href: '/profile', label: 'My Profile' },
+  { href: '/settings', label: 'Settings' },
+  { href: '/coming-soon', label: 'Subscription' },
+  { href: '/coming-soon', label: 'Help Center' },
 ] as const;
 
 interface ProfileAvatarProps {
@@ -57,15 +57,14 @@ export const ProfileDropdown: React.FC<ProfileDropdownProps> = ({ user, onLogout
           key={item.href} 
           href={item.href} 
           className="
-            flex items-center space-x-3 px-4 py-2.5 text-sm text-white/90 
+            flex items-center justify-between px-4 py-2.5 text-sm text-white/90 
             hover:bg-[#00D4FF]/10 hover:text-[#00D4FF] 
             transition-all duration-200
             group
           "
         >
-          <span className="text-base transition-transform duration-200 group-hover:scale-110">{item.icon}</span>
           <span>{item.label}</span>
-          <svg className="w-4 h-4 ml-auto opacity-0 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
           </svg>
         </Link>
@@ -82,7 +81,6 @@ export const ProfileDropdown: React.FC<ProfileDropdownProps> = ({ user, onLogout
           group
         "
       >
-        <span className="text-base transition-transform duration-200 group-hover:translate-x-1">🚪</span>
         <span className="font-medium">Logout</span>
       </button>
     </div>
