@@ -6,12 +6,14 @@ interface StockHeaderProps {
   symbol: string;
   isInWatchlist: boolean;
   onToggleWatchlist: () => void;
+  onViewNews: () => void;
 }
 
 export const StockHeader: React.FC<StockHeaderProps> = ({
   symbol,
   isInWatchlist,
   onToggleWatchlist,
+  onViewNews,
 }) => {
   const router = useRouter();
 
@@ -47,7 +49,10 @@ export const StockHeader: React.FC<StockHeaderProps> = ({
             <button className="px-4 py-2 bg-gradient-to-r from-[#00D4FF] to-[#00A8E8] text-white font-semibold rounded-lg hover:shadow-[0_0_20px_rgba(0,212,255,0.4)] transition-all duration-300">
               Set Price Alert
             </button>
-            <button className="px-4 py-2 bg-[#0A1929] border border-[#37474F] text-white font-semibold rounded-lg hover:border-[#00D4FF] hover:bg-[#00D4FF]/5 transition-all duration-200">
+            <button 
+              onClick={onViewNews}
+              className="px-4 py-2 bg-[#0A1929] border border-[#37474F] text-white font-semibold rounded-lg hover:border-[#00D4FF] hover:bg-[#00D4FF]/5 transition-all duration-200"
+            >
               View News
             </button>
           </div>

@@ -9,50 +9,55 @@ import { LiveChart } from './components/LiveChart';
 import { TechnicalAnalysis } from './components/TechnicalAnalysis';
 import { CompanyProfile } from './components/CompanyProfile';
 import { Financials } from './components/Financials';
+import { MarketNews } from './components/MarketNews';
+
+const getWatchlist = (): string[] => {
+  try {
+    return JSON.parse(localStorage.getItem('watchlist') || '[]');
+  } catch {
+    return [];
+  }
+};
+
+const getTradingViewSymbol = (sym: string): string => {
+  if (sym.endsWith('-USD')) return sym.replace('-USD', 'USD');
+  if (sym.includes(':')) return sym;
+  return `NASDAQ:${sym}`;
+};
 
 export default function StockDetailsPage() {
   const params = useParams();
-  const symbol = params.symbol as string;
-  const [isInWatchlist, setIsInWatchlist] = useState(false);
+  const symbol = params?.symbol as string;
 
-  // Check if stock is in watchlist
+  const [isInWatchlist, setIsInWatchlist] = useState(false);
+  const [isNewsOpen, setIsNewsOpen] = useState(false);
+
   useEffect(() => {
-    const watchlist = JSON.parse(localStorage.getItem('watchlist') || '[]');
-    setIsInWatchlist(watchlist.includes(symbol));
+    if (symbol) {
+      setIsInWatchlist(getWatchlist().includes(symbol));
+    }
   }, [symbol]);
 
-  // Toggle watchlist
   const toggleWatchlist = () => {
-    const watchlist = JSON.parse(localStorage.getItem('watchlist') || '[]');
-    const newWatchlist = isInWatchlist
-      ? watchlist.filter((s: string) => s !== symbol)
+    const watchlist = getWatchlist();
+    const updated = isInWatchlist
+      ? watchlist.filter((s) => s !== symbol)
       : [...watchlist, symbol];
-    
-    localStorage.setItem('watchlist', JSON.stringify(newWatchlist));
+
+    localStorage.setItem('watchlist', JSON.stringify(updated));
     setIsInWatchlist(!isInWatchlist);
   };
 
-  // Determine the exchange prefix for TradingView
-  const getTradingViewSymbol = (sym: string) => {
-    if (sym.includes('-USD')) {
-      // Crypto
-      return sym.replace('-USD', 'USD');
-    }
-    // Default to NASDAQ for stocks
-    return `NASDAQ:${sym}`;
-  };
+  if (!symbol) return null;
 
   const tradingViewSymbol = getTradingViewSymbol(symbol);
-
-  // Get all TradingView widget refs from custom hook
   const {
     chartRef,
     companyProfileRef,
     technicalAnalysisRef,
     fundamentalDataRef,
-    symbolOverviewRef
+    symbolOverviewRef,
   } = useTradingViewWidgets(tradingViewSymbol);
-
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0A1929] via-[#0D1B2A] to-[#1B263B] pt-24">
@@ -61,6 +66,7 @@ export default function StockDetailsPage() {
           symbol={symbol}
           isInWatchlist={isInWatchlist}
           onToggleWatchlist={toggleWatchlist}
+          onViewNews={() => setIsNewsOpen(true)}
         />
 
         <SymbolOverview symbolOverviewRef={symbolOverviewRef} />
@@ -76,6 +82,13 @@ export default function StockDetailsPage() {
             <Financials fundamentalDataRef={fundamentalDataRef} />
           </div>
         </div>
+
+        <MarketNews
+          symbol={symbol}
+          tradingViewSymbol={tradingViewSymbol}
+          isOpen={isNewsOpen}
+          onClose={() => setIsNewsOpen(false)}
+        />
       </div>
     </div>
   );
