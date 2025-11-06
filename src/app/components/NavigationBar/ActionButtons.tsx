@@ -84,7 +84,7 @@ export const UnauthenticatedActions: React.FC = () => (
       Login
     </Link>
     <Link 
-      href="/login" 
+      href="/signup" 
       className="
         relative inline-flex items-center px-4 sm:px-6 py-2 sm:py-2.5 
         text-xs sm:text-sm font-semibold text-white 
