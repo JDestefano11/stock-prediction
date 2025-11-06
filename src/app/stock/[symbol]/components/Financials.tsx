@@ -10,8 +10,8 @@ export const Financials: React.FC<FinancialsProps> = ({ fundamentalDataRef }) =>
       <div className="p-4 border-b border-[#263238] bg-gradient-to-r from-[#0A1929] to-[#0D1B2A]">
         <h3 className="text-lg font-bold text-white">Financials</h3>
       </div>
-      <div className="p-4">
-        <div ref={fundamentalDataRef}></div>
+      <div className="overflow-auto max-h-[900px]">
+        <div ref={fundamentalDataRef} className="min-h-[830px]"></div>
       </div>
     </div>
   );

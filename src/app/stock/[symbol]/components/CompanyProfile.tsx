@@ -10,8 +10,8 @@ export const CompanyProfile: React.FC<CompanyProfileProps> = ({ companyProfileRe
       <div className="p-4 border-b border-[#263238] bg-gradient-to-r from-[#0A1929] to-[#0D1B2A]">
         <h3 className="text-lg font-bold text-white">Company Profile</h3>
       </div>
-      <div className="p-4">
-        <div ref={companyProfileRef}></div>
+      <div className="overflow-auto">
+        <div ref={companyProfileRef} className="min-h-[200px]"></div>
       </div>
     </div>
   );
