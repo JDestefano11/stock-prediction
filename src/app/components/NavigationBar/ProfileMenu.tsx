@@ -4,10 +4,10 @@ import Image from 'next/image';
 import { User } from '../../utils/types';
 
 const PROFILE_MENU_ITEMS = [
-  { href: '/profile', label: 'My Profile' },
-  { href: '/settings', label: 'Settings' },
-  { href: '/coming-soon', label: 'Subscription' },
-  { href: '/coming-soon', label: 'Help Center' },
+  { id: 'profile', href: '/profile', label: 'My Profile' },
+  { id: 'settings', href: '/settings', label: 'Settings' },
+  { id: 'subscription', href: '/coming-soon', label: 'Subscription' },
+  { id: 'help', href: '/coming-soon', label: 'Help Center' },
 ] as const;
 
 interface ProfileAvatarProps {
@@ -54,7 +54,7 @@ export const ProfileDropdown: React.FC<ProfileDropdownProps> = ({ user, onLogout
     <div className="relative py-2">
       {PROFILE_MENU_ITEMS.map((item) => (
         <Link 
-          key={item.href} 
+          key={item.id} 
           href={item.href} 
           className="
             flex items-center justify-between px-4 py-2.5 text-sm text-white/90 
